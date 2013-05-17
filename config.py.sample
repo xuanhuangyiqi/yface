@@ -1,0 +1,9 @@
+SITE = "localhost:8010"
+static_path = "static/"
+DATABASE = {
+    'database': 'yface',
+    'host':     'localhost',
+    'user':     'root',
+    'password': '901014',
+}
+baidu_key = 'B191d4e9d6d44492d34150a81718ca1c'
