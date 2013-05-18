@@ -8,8 +8,8 @@ class Model:
     def __init__(self):
         self.db = tornado.database.Connection(**DATABASE)
 
-    def create_profile(self, yid):
-        sql = "INSERT INTO profile(yid) VALUES ('%s')"%yid
+    def create_profile(self, token, secret):
+        sql = "INSERT INTO profile(token, secret) VALUES ('%s','%s')"%(token, secret)
         self.db.execute(sql)
 
     def update_profile(self, yid, args):

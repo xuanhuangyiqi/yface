@@ -1,10 +1,10 @@
 create table if not exists `profile`(
-    `yid` varchar(20),
-    `ytoken` varchar(100),
+    `token` varchar(100),
+    `secret` varchar(100),
     `about_id` varchar(20),
     `facepp_id` varchar(20), 
     `avatar_id` varchar(20),
-    PRIMARY KEY (`yid`)
+    PRIMARY KEY (`token`)
 ) ENGINE = InnoDB DEFAULT CHARSET=utf8;
 
 
