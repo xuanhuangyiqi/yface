@@ -89,7 +89,7 @@ def cut_faces(photo_files = []) :
         res = face_api.detection.detect(url = f)
         if len(res['face']) == 0 :
             continue
-        face_ids.append(res['face'][0]['face_id'])
+        face_ids.append(res['face'][0]['face_id'] + f[f.rfind('/')+1:])
         getsmallFace(res,f)
     return face_ids 
     
@@ -159,7 +159,6 @@ def add_people2flickrPhoto(photo_img = '', photo_title = '', face2user_id = {}) 
     upload_photo = flickr_api.upload(photo_file = photo_img, title = photo_title)
     photo_id = upload_photo['id']
     faces_box = face_identify(photo_img = photo_img)
-    
     '''
     face2user_id = {}
     c = 1
