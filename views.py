@@ -3,36 +3,19 @@ import time
 import tornado.web
 from config import SITE,static_path
 from models import *
+from api import *
 import json
+
 
 class BaseHandler(tornado.web.RequestHandler):
     @property
     def db(self):
         return Model()
-        
 
-'''
-    input: the yid
-    output: the list of head images
-'''
-def getAvatars(yid):
-    # post photos to face++
-        # retrieve & save faces
-        # response faces
-    #call the function from lixin
-    pass
-    
-'''
-    input: yid, avatar_list 
-'''
-def trainAvatars(yid, avatar_list):
-    #call the function from lixin
-    pass
-'''
-    return face list
-'''
-def detectFaces(img):
-    pass
+    @property
+    def flickr(self):
+        token = self.get_argue
+        
 
 class ProfileCreateHandler(BaseHandler):
     def get(self):
@@ -40,17 +23,13 @@ class ProfileCreateHandler(BaseHandler):
     def post(self):
         token = self.get_argument('token')
         secret = self.get_argument('secret')
-        self.db.create_profile(token,secret) #insert a user profile
-        result = {'result':True}
-        message = json.dumps(result)
-        self.write(message)
+        username = self.get_argument('username')
+        flickr_id = self.get_argument('flickr_id')
+        self.db.create_profile(token,secret, username, flickr_id) #insert a user profile
+        flickrSaveInfo(token, secret, username)
+        
+        self.write('ok')
 
-
-class GetProfileHandler(BaseHandler):
-    def get(self):
-        pass
-    def post(self):
-        pass
     
 '''
     input: yid and about_id
@@ -59,17 +38,18 @@ class GetProfileHandler(BaseHandler):
 class ProfileUpdateHandler(BaseHandler):
     def post(self):
         # about.me
-        token = self.get_argument('token')
+        username = self.get_argument('username')
         about_id = self.get_argument('about_id')
-        facepp_id = faceppCreatePerson()
-        args = {"about_id":about_id, "facepp_id":facepp_id}
-        db.update_profile(token,args) #update the "about_id" given yid
+        args = {"about_id":about_id}
+        self.db.update_profile(username, args) #update the "about_id" given yid
 
-        photo_list = flickrGetPhotos(token) # get avatars given yid
-        avatar_list = faceppGetAvatars(photo_list)
+        photo_list = get_photo_files(username) # get avatars given yid
+        print photo_list
+        avatar_list = cut_faces(photo_list)
         result = {'images':avatar_list}
         message = json.dumps(result)
         self.write(message)
+        #self.write('ok')
 
 
 '''

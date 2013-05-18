@@ -8,12 +8,18 @@ class Model:
     def __init__(self):
         self.db = tornado.database.Connection(**DATABASE)
 
-    def create_profile(self, token, secret):
-        sql = "INSERT INTO profile(token, secret) VALUES ('%s','%s')"%(token, secret)
-        self.db.execute(sql)
+    def create_profile(self, token, secret, username, flickr_id):
+        sql = "SELECT * FROM profile WHERE username = '%s'"%username
+        results = self.db.query(sql)
+        if results:
+            sql = "UPDATE profile SET token = '%s', secret='%s' WHERE username='%s'"%(token, secret, username)
+            self.db.execute(sql)
+        else:
+            sql = "INSERT INTO profile(token, secret, username, flickr_id) VALUES ('%s','%s', '%s', '%s')"%(token, secret, username, flickr_id)
+            self.db.execute(sql)
 
-    def update_profile(self, yid, args):
-        sql = "UPDATE profile SET %s WHERE yid='%s'"%(','.join(["%s='%s'"%(x, args[x]) for x in args]), yid)
+    def update_profile(self, username, args):
+        sql = "UPDATE profile SET %s WHERE username='%s'"%(','.join(["%s='%s'"%(x, args[x]) for x in args]), username)
         self.db.execute(sql)
 
     def get_profile(self, yid):
