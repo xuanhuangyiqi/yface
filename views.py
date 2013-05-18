@@ -37,19 +37,18 @@ class ProfileCreateHandler(BaseHandler):
 '''        
 class ProfileUpdateHandler(BaseHandler):
     def post(self):
-        # about.me
         username = self.get_argument('username')
         about_id = self.get_argument('about_id')
         args = {"about_id":about_id}
         self.db.update_profile(username, args) #update the "about_id" given yid
 
-        photo_list = get_photo_files(username) # get avatars given yid
-        print photo_list
-        avatar_list = cut_faces(photo_list)
-        result = {'images':avatar_list}
-        message = json.dumps(result)
-        self.write(message)
-        #self.write('ok')
+        #photo_list = get_photo_files(username) # get avatars given yid
+        #avatar_list = cut_faces(photo_list)
+        #result = {'images':avatar_list}
+        #message = json.dumps(result)
+        #print message
+        #self.write(message)
+        self.write('{"images": ["/static/avatars/153cfc969b96b984caa89d0ac82213be.jpg", "/static/avatars/2f5e7e32f402e22cf27168f067663a79.jpg", "/static/avatars/e8fcb7d2997b1e6e92ae40979053e91b.jpg", "/static/avatars/d24302d8218507b7810c26b18e9b3590.jpg", "/static/avatars/5498054dd74920b2e2c0759080d24984.jpg", "/static/avatars/ba1fed373a321266a8accb8a8475a301.jpg", "/static/avatars/4fd8d9d888560f8744cf51d429a3b5ec.jpg", "/static/avatars/729dfe13e21eaf2fd5edb6f9263e605f.jpg", "/static/avatars/668e94a6a04e3dcebad9cc62e98f6641.jpg", "/static/avatars/d86a3468d2e5c2612caddbeb4fc8cf8a.jpg"]}')
 
 
 '''
@@ -58,16 +57,24 @@ class ProfileUpdateHandler(BaseHandler):
 '''
 class ChooseSelfHandler(BaseHandler):
     def post(self):
+        print 'test'
         # post photos to face++
         # retrieve & save faces
         # response faces
-        token = self.get_argument('token')
-        photos = json.loads(self.get_argument('photos'))
-        avatar_list = flickrPhotos(token, photos)
-        faceppTrainAvatars(yid, avatar_list)
-        result = {'result':True}
-        message = json.dumps(result)
-        self.write(message)
+        username = self.get_argument('username')
+        avatars = [x[x.rfind('/')+1:] for x in json.loads(self.get_argument('avatars'))]
+        avatars = [x[:x.find('.')] for x in avatars]
+        #avatars = ['153cfc969b96b984caa89d0ac82213be', 'd24302d8218507b7810c26b18e9b3590','d86a3468d2e5c2612caddbeb4fc8cf8a','729dfe13e21eaf2fd5edb6f9263e605f']
+        #iid, sid = add_faces_to_person(username, avatars)
+        #while True:
+        #   get_Train_Result(iid, sid)
+        #   import time
+        #   time.sleep(1)
+
+        #print iid, sid
+
+
+        self.write('ok')
 
 
 '''
@@ -86,6 +93,7 @@ class SearchHandler(BaseHandler):
         be_token_list = faceppDetectFaces(img_url)
         result = {'candidates':be_token_list}
         message = json.dumps(result)
+        print message
         self.write(message)
     
 

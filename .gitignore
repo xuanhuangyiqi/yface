@@ -1,3 +1,4 @@
+.DS_Store
 *.py[cod]
 
 # C extensions
@@ -35,3 +36,6 @@ nosetests.xml
 .pydevproject
 config.py
 
+*.jpg
+*.png
+*.verifier
