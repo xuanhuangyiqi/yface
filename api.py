@@ -87,8 +87,12 @@ def cut_faces(photo_files = []) :
 
 
 def add_faces_to_person (username = 'YahooHack2013', face_id_list = [], defaultGroupName = 'yahoohack', defaultFaceSetName = 'yahoohack_faceset') :
-    person = face_api.person.create(person_name = username, group_name = defaultGroupName)
-    person_id = person['person_id']
+    try :
+        person = face_api.person.get_info(person_name = username)
+        person_id = person['person_id']
+    except Exception,ex :
+        person = face_api.person.create(person_name = username, group_name = defaultGroupName)
+        person_id = person['person_id']
     if len(face_id_list) <= 0 :
         print 'Warning,face_id_list empty'
         return
@@ -111,3 +115,32 @@ def get_Train_Result(identify_session_id, search_session_id) :
     search_res = face_api.info.get_session(session_id = search_session_id)
     print 'identify\t%s\t\tsearch\t%s' % (identify_res['status'], search_res['status'])
     return identify_res['result'], search_res['result']
+
+
+
+def face_search(photo_url = '', photo_img = '', defaultFaceSetName = 'yahoohack_faceset') :
+    if photo_url == '' and photo_img == '':
+        print 'photo is empty!'    
+        return
+    if photo_img != '' :
+        res = face_api.detection.detect(img = File(photo_img))
+    if photo_url != '' :
+        res = face_api.detection.detect(url = photo_url)
+    if not res['face']: return []
+    face_id = res['face'][0]['face_id']
+    search_res = face_api.recognition.search(key_face_id = face_id, faceset_name = defaultFaceSetName, count = 10)
+    faces_res = search_res['candidate']
+    face_ids = [face['face_id'] for face in faces_res]
+    face_ids_str = ','.join(face_ids)
+
+    face_info = face_api.info.get_face(face_id = face_ids_str)['face_info']
+
+    person_names = {} 
+    for face in face_info :
+        person_names[face['face_id']] = face['person'][0]['person_name']
+
+    person_name_list = []
+    for face_id in face_ids :
+        person_name_list.append(person_names[face_id])
+    print person_name_list
+    return person_name_list

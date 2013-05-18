@@ -26,6 +26,14 @@ class Model:
         sql = "SELECT * FROM profile WHERE yid = '%s'"%yid
         return self.db.query(sql)
 
+    def get_profile_by_username(self, username):
+        sql = "SELECT * FROM profile WHERE username = '%s'"%username
+        return self.db.query(sql)
     def create_record(self, yid, be_yid, ctime, geo):
         sql = "INSERT INTO record(yid, be_yid, ctime, geo) VALUES('%s', '%s', %d, '%s')"%(yid, be_yid, ctime, geo)
         self.db.execute(sql)
+
+    def username2id(self):
+        sql = "SELECT * FROM profile"
+        p = self.db.query(sql)
+        return dict([(x['username'], x['flickr_id']) for x in p])

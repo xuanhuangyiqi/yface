@@ -10,6 +10,7 @@ if __name__ == "__main__":
         ('/profile/create', ProfileCreateHandler),
         ('/profile/update', ProfileUpdateHandler),
         ('/train', ChooseSelfHandler),
+        ('/upload', SearchHandler),
         ],
         static_path=config.static_path)
     app.listen(8010)
