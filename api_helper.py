@@ -89,7 +89,7 @@ def cut_faces(photo_files = []) :
         res = face_api.detection.detect(url = f)
         if len(res['face']) == 0 :
             continue
-        face_ids.append(res['face'][0]['face_id'] + f[f.rfind('/')+1:])
+        face_ids.append(res['face'][0]['face_id'] + f[f.rfind('.')+1:])
         getsmallFace(res,f)
     return face_ids 
     
