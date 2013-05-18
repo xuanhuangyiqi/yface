@@ -159,14 +159,16 @@ def face_identify(photo_url = '', photo_img = '', defaultGroupName = 'yahoohack'
     if photo_url != '' :
         #???
         res = face_api.recognition.identify(group_name = defaultGroupName, url = photo_url)
+    
     faces = res['face']
     faces_box = {}
     for face in faces :
+        person_name = face['candidate'][0]['person_name']
         box = getFaceBox(face,img_width,img_height)
-        faces_box[face['face_id']] = box
+        faces_box[face['face_id']] = person_name, box
     return faces_box
 
-def add_people2flickrPhoto(photo_img = '', photo_title = '', face2user_id = {}) :
+def add_people2flickrPhoto(photo_img = '', photo_title = '', defaultFaceSetName = 'yahoohack_faceset', username2user_id = {}) :
     '''
     1.upload a photo to flickr
     2.get faces box
@@ -177,22 +179,21 @@ def add_people2flickrPhoto(photo_img = '', photo_title = '', face2user_id = {}) 
     add_geo2photo(upload_photo, 20.1345,31.214)
     faces_box = face_identify(photo_img = photo_img)
     face2user_id = {}
-    c = 1
-    for key in faces_box :
-        if c%2 == 0 :
-            face2user_id[key] = '95831174@N04'
-        else :
-            face2user_id[key] = '95809352@N02'
-        c += 1
-     
-
+    '''
     for face_id in faces_box :
-        box = faces_box[face_id]
-        print box
+        person_name = face_api.info.get_face(face_id = face_id)
+        #['face_info'][0]['person'][0]['person_name']
+        print person_name
+    '''
+    for face_id in faces_box :
+        person_name, box = faces_box[face_id]
         x,y,w,h = box[0], box[1], box[2] - box[0], box[3] - box[1]
         print x,y,w,h
-        upload_photo.addPerson(user_id = face2user_id[face_id], person_x = x,person_y = y,person_w = w, person_h = h)
-    return photo_id
+        print person_name
+        upload_photo.addPerson(user_id = username2user_id[person_name], person_x = x,person_y = y,person_w = w, person_h = h)
+    #return photo_id
+    
+
 
 def add_geo2photo(photo, lat, lon) :
     photo.setLocation(lat = lat,lon = lon)
@@ -208,9 +209,9 @@ if __name__ == '__main__' :
     #photo_files = get_photo_files()
     #cut_faces(photo_files)
     
-    face_search(photo_img = '3.jpg')
+    #face_search(photo_img = '1.jpg')
     #faces_box = face_identify(photo_img = '2.jpg')
     #print faces_box
-    #print add_people2flickrPhoto(photo_img = '2.jpg', photo_title = 'test haha')
+    print add_people2flickrPhoto(photo_img = '2.jpg', photo_title = 'test haha')
 
 
