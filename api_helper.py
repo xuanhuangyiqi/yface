@@ -134,7 +134,14 @@ def face_search(photo_url = '', photo_img = '', defaultFaceSetName = 'yahoohack_
     face_id = res['face'][0]['face_id']
     search_res = face_api.recognition.search(key_face_id = face_id, faceset_name = defaultFaceSetName, count=3)
     faces_res = search_res['candidate']
-    print faces_res
+    face_ids = [face['face_id'] for face in faces_res]
+    face_ids_str = ','.join(face_ids)
+
+    face_info = face_api.info.get_face(face_id = face_ids_str)['face_info']
+
+    face_urls = [face['url'] for face in face_info]
+
+    print face_urls
    
 def face_identify(photo_url = '', photo_img = '', defaultGroupName = 'yahoohack') :
     if photo_url == '' and photo_img == '':
@@ -196,9 +203,9 @@ if __name__ == '__main__' :
     #photo_files = get_photo_files()
     #cut_faces(photo_files)
     
-    #face_search(photo_img = '1.jpg')
+    face_search(photo_img = '1.jpg')
     #faces_box = face_identify(photo_img = '2.jpg')
     #print faces_box
-    print add_people2flickrPhoto(photo_img = '2.jpg', photo_title = 'test haha')
+    #print add_people2flickrPhoto(photo_img = '2.jpg', photo_title = 'test haha')
 
 
