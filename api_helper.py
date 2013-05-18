@@ -6,6 +6,26 @@ import os
 import flickr_api
 
 
+def getFaceBox(face, img_width, img_height) :
+    border = 5
+    x = face['position']['center']['x']
+    y = face['position']['center']['y']
+    x = img_width * 0.01 * x
+    y = img_height * 0.01 * y
+    
+    width = face['position']['width'] * img_width * 0.01
+    height = face['position']['height'] * img_height * 0.01
+    
+    x1 = int(x-width/2) - border
+    y1 = int(y-height/2) - border
+    
+    x2 = int(x+width/2) + border
+    y2 = int(y+width/2) + border
+    
+    box = (x1,y1,x2,y2)
+    return box
+    
+
 def getsmallFace(detect_res, pic_path, border = 10, default_size = (100,100)) :
     x = detect_res['face'][0]['position']['center']['x']
     y = detect_res['face'][0]['position']['center']['y']
@@ -13,7 +33,7 @@ def getsmallFace(detect_res, pic_path, border = 10, default_size = (100,100)) :
     y = detect_res['img_height'] * 0.01 * y
     
     width = detect_res['face'][0]['position']['width'] * detect_res['img_width'] * 0.01
-    height = detect_res['face'][0]['position']['height'] * detect_res['img_width'] * 0.01
+    height = detect_res['face'][0]['position']['height'] * detect_res['img_height'] * 0.01
     
     x1 = int(x-width/2) - border
     y1 = int(y-height/2) - border
@@ -67,7 +87,9 @@ def cut_faces(photo_files = []) :
     face_ids = []
     for f in photo_files :
         res = face_api.detection.detect(url = f)
-        face_ids.append(detect_res['face'][0]['face_id'])
+        if len(res['face']) == 0 :
+            continue
+        face_ids.append(res['face'][0]['face_id'])
         getsmallFace(res,f)
     return face_ids 
     
@@ -109,8 +131,54 @@ def face_search(photo_url = '', photo_img = '', defaultFaceSetName = 'yahoohack_
     search_res = face_api.recognition.search(key_face_id = face_id, faceset_name = defaultFaceSetName, count=3)
     faces_res = search_res['candidate']
     print faces_res
+   
+def face_identify(photo_url = '', photo_img = '', defaultGroupName = 'yahoohack') :
+    if photo_url == '' and photo_img == '':
+        print 'photo is empty!'    
+        return
+    if photo_img != '' :
+        res = face_api.recognition.identify(group_name = defaultGroupName, img = File(photo_img))
+        img = Image.open(photo_img)
+        img_width, img_height = img.size
+    if photo_url != '' :
+        #???
+        res = face_api.recognition.identify(group_name = defaultGroupName, url = photo_url)
+    faces = res['face']
+    faces_box = {}
+    for face in faces :
+        box = getFaceBox(face,img_width,img_height)
+        faces_box[face['face_id']] = box
+    return faces_box
+
+def add_people2flickrPhoto(photo_img = '', photo_title = '', face2user_id = {}) :
+    '''
+    1.upload a photo to flickr
+    2.get faces box
+    3.add face to photo
+    '''
+    upload_photo = flickr_api.upload(photo_file = photo_img, title = photo_title)
+    photo_id = upload_photo['id']
+    faces_box = face_identify(photo_img = photo_img)
     
-    
+    '''
+    face2user_id = {}
+    c = 1
+    for key in faces_box :
+        if c%2 == 0 :
+            face2user_id[key] = '95831174@N04'
+        else :
+            face2user_id[key] = '95809352@N02'
+        c += 1
+    ''' 
+
+    for face_id in faces_box :
+        box = faces_box[face_id]
+        print box
+        x,y,w,h = box[0], box[1], box[2] - box[0], box[3] - box[1]
+        print x,y,w,h
+        upload_photo.addPerson(user_id = face2user_id[face_id], person_x = x,person_y = y,person_w = w, person_h = h)
+    return photo_id
+
 if __name__ == '__main__' :
     Oauth()
     f = open('face_id.list','r')
@@ -122,7 +190,9 @@ if __name__ == '__main__' :
     #photo_files = get_photo_files()
     #cut_faces(photo_files)
     
-    face_search(photo_img = '1.jpg')
-
+    #face_search(photo_img = '1.jpg')
+    #faces_box = face_identify(photo_img = '2.jpg')
+    #print faces_box
+    print add_people2flickrPhoto(photo_img = '2.jpg', photo_title = 'test haha', user_id = '95809352@N02')
 
 
