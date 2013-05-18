@@ -132,16 +132,21 @@ def face_search(photo_url = '', photo_img = '', defaultFaceSetName = 'yahoohack_
     if photo_url != '' :
         res = face_api.detection.detect(url = photo_url)
     face_id = res['face'][0]['face_id']
-    search_res = face_api.recognition.search(key_face_id = face_id, faceset_name = defaultFaceSetName, count=3)
+    search_res = face_api.recognition.search(key_face_id = face_id, faceset_name = defaultFaceSetName, count = 10)
     faces_res = search_res['candidate']
     face_ids = [face['face_id'] for face in faces_res]
     face_ids_str = ','.join(face_ids)
 
     face_info = face_api.info.get_face(face_id = face_ids_str)['face_info']
 
-    face_urls = [face['url'] for face in face_info]
+    person_names = {} 
+    for face in face_info :
+        person_names[face['face_id']] = face['person'][0]['person_name']
 
-    print face_urls
+    person_name_list = []
+    for face_id in face_ids :
+        person_name_list.append(person_names[face_id])
+    print person_name_list
    
 def face_identify(photo_url = '', photo_img = '', defaultGroupName = 'yahoohack') :
     if photo_url == '' and photo_img == '':
@@ -203,7 +208,7 @@ if __name__ == '__main__' :
     #photo_files = get_photo_files()
     #cut_faces(photo_files)
     
-    face_search(photo_img = '1.jpg')
+    face_search(photo_img = '3.jpg')
     #faces_box = face_identify(photo_img = '2.jpg')
     #print faces_box
     #print add_people2flickrPhoto(photo_img = '2.jpg', photo_title = 'test haha')
