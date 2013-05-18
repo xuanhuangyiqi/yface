@@ -54,9 +54,9 @@ def getsmallFace(detect_res, pic_path, border = 10, default_size = (100,100)) :
     
     im = Image.open(filename)
     xim = im.crop(box)
-    xim.resize(default_size)
+    newxim = xim.resize(default_size)
     # save as XXXX.(picture format)
-    xim.save(detect_res['face'][0]['face_id'] + pic_path[pic_path.rfind('.'):])
+    netxim.save(detect_res['face'][0]['face_id'] + pic_path[pic_path.rfind('.'):])
     
 def Oauth(key_file = '', verifier_file = 'flickr.verifier') :   
     API_KEY = '0b9ca8fca8041e791d684c0b88fe5708'
@@ -94,8 +94,12 @@ def cut_faces(photo_files = []) :
     return face_ids 
     
 def add_faces_to_person (username = 'YahooHack2013', face_id_list = [], defaultGroupName = 'yahoohack', defaultFaceSetName = 'yahoohack_faceset') :
-    person = face_api.person.create(person_name = username, group_name = defaultGroupName)
-    person_id = person['person_id']
+    try :
+        person = face_api.person.get_info(person_name = username)
+        person_id = person['person_id']
+    except Exception,ex :
+        person = face_api.person.create(person_name = username, group_name = defaultGroupName)
+        person_id = person['person_id']
     if len(face_id_list) <= 0 :
         print 'Warning,face_id_list empty'
         return
@@ -158,8 +162,8 @@ def add_people2flickrPhoto(photo_img = '', photo_title = '', face2user_id = {}) 
     '''
     upload_photo = flickr_api.upload(photo_file = photo_img, title = photo_title)
     photo_id = upload_photo['id']
+    add_geo2photo(upload_photo, 20.1345,31.214)
     faces_box = face_identify(photo_img = photo_img)
-    '''
     face2user_id = {}
     c = 1
     for key in faces_box :
@@ -168,7 +172,7 @@ def add_people2flickrPhoto(photo_img = '', photo_title = '', face2user_id = {}) 
         else :
             face2user_id[key] = '95809352@N02'
         c += 1
-    ''' 
+     
 
     for face_id in faces_box :
         box = faces_box[face_id]
@@ -177,6 +181,9 @@ def add_people2flickrPhoto(photo_img = '', photo_title = '', face2user_id = {}) 
         print x,y,w,h
         upload_photo.addPerson(user_id = face2user_id[face_id], person_x = x,person_y = y,person_w = w, person_h = h)
     return photo_id
+
+def add_geo2photo(photo, lat, lon) :
+    photo.setLocation(lat = lat,lon = lon)
 
 if __name__ == '__main__' :
     Oauth()
@@ -192,6 +199,6 @@ if __name__ == '__main__' :
     #face_search(photo_img = '1.jpg')
     #faces_box = face_identify(photo_img = '2.jpg')
     #print faces_box
-    print add_people2flickrPhoto(photo_img = '2.jpg', photo_title = 'test haha', user_id = '95809352@N02')
+    print add_people2flickrPhoto(photo_img = '2.jpg', photo_title = 'test haha')
 
 
