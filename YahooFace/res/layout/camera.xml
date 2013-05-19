@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>     
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"     
+    android:orientation="vertical" android:layout_width="fill_parent"     
+    android:layout_height="fill_parent">     
+<RelativeLayout android:id="@+id/top"  
+android:layout_width="fill_parent"  
+android:layout_height="wrap_content"  
+android:orientation="horizontal"  >  
+<TextView   
+            android:layout_width="fill_parent"  
+            android:layout_height="40dp"  
+            android:background="#363433"  
+            android:textColor="#FFFFFF"  
+            android:gravity="center" 
+            android:id="@+id/personinfotitlebar"   
+            android:textSize="20sp"/>
+         <ImageView 
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/head"
+            android:layout_alignLeft="@id/personinfotitlebar"
+            android:layout_alignBottom="@id/personinfotitlebar"
+            android:layout_alignTop="@id/personinfotitlebar"
+            android:layout_margin="@dimen/padding_minist"
+            android:id="@+id/yahooheader"/>
+         <TextView 
+            android:layout_width="wrap_content"  
+            android:layout_height="40dp"  
+            android:textColor="#FFFFFF"    
+            android:textSize="20sp"
+            android:text="xpsmiler"
+            android:id="@+id/yahooname"
+            android:layout_toRightOf="@id/yahooheader"
+            android:layout_alignBottom="@id/personinfotitlebar"
+            android:layout_alignTop="@id/personinfotitlebar"
+            android:layout_marginLeft="@dimen/padding_medium"
+            android:gravity="center"
+             /> 
+   <LinearLayout android:id="@+id/center"  
+	android:layout_width="fill_parent"  
+	android:layout_height="wrap_content"  
+	android:orientation="vertical"   
+	android:layout_below="@id/top" >  
+    <ImageView android:id="@+id/imageID"
+        android:layout_marginLeft="3dp"
+        android:src="@drawable/help" 
+        android:layout_gravity="center"      
+       android:layout_width="fill_parent"     
+       android:layout_height="wrap_content" />     
+	</LinearLayout>
+</RelativeLayout>      
+              
+    <LinearLayout android:id="@+id/bottom"  
+	android:layout_width="fill_parent"  
+	android:layout_height="wrap_content"  
+	android:orientation="horizontal"  
+	android:layout_alignParentBottom="true"  >  
+	<Button android:id="@+id/btn_01"  
+	android:layout_width="fill_parent"  
+	android:layout_height="wrap_content"  
+	android:layout_marginTop="2dip"  
+	android:text="album"  
+	android:layout_weight="1"/>  
+	<Button android:id="@+id/btn_02"  
+	android:layout_width="fill_parent"  
+	android:layout_height="wrap_content"  
+	android:layout_marginTop="2dip"  
+	android:text="take photo"  
+	android:layout_weight="1"/>  
+	</LinearLayout> 
+</RelativeLayout>

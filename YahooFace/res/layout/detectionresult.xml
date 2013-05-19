@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+	    <RelativeLayout 
+	        android:layout_width="fill_parent"  
+    		android:layout_height="wrap_content">
+	    <TextView   
+            android:layout_width="fill_parent"  
+            android:layout_height="40dp"  
+            android:background="#363433"  
+            android:textColor="#FFFFFF"  
+            android:gravity="center" 
+            android:id="@+id/personinfotitlebar"   
+            android:textSize="20sp"/>
+         <ImageView 
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/head"
+            android:layout_alignLeft="@id/personinfotitlebar"
+            android:layout_alignBottom="@id/personinfotitlebar"
+            android:layout_alignTop="@id/personinfotitlebar"
+            android:layout_margin="@dimen/padding_minist"
+            android:id="@+id/yahooheader"/>
+         <TextView 
+            android:layout_width="wrap_content"  
+            android:layout_height="40dp"  
+            android:textColor="#FFFFFF"    
+            android:textSize="20sp"
+            android:text="xpsmiler"
+            android:id="@+id/yahooname"
+            android:layout_toRightOf="@id/yahooheader"
+            android:layout_alignBottom="@id/personinfotitlebar"
+            android:layout_alignTop="@id/personinfotitlebar"
+            android:layout_marginLeft="@dimen/padding_medium"
+            android:gravity="center"
+             />
+          <TextView 
+                android:layout_below="@id/yahooname" 
+                android:layout_width="fill_parent"    
+                android:layout_height="wrap_content"   
+                android:textSize="19dp"  
+                android:textColor="#00A2E8"  
+                android:text="Please click the right result!"
+                android:layout_marginTop="@dimen/padding_large"
+                >  
+            </TextView> 
+         </RelativeLayout>
+    <ListView
+        android:id="@+id/main_lv_list"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" />
+
+</LinearLayout>

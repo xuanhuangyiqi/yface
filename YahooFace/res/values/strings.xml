@@ -1,0 +1,17 @@
+<resources>
+	
+    <string name="app_name">YahooFace</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="menu_settings">Settings</string>
+    <string name="title_activity_yahoo_camera">YahooFace</string>
+	<string name="title_personinfo">Profile</string>
+	<string name="title_trainactivity">Train</string>
+	<string name="text1_personinfo">Please fill your about.me name</string>
+	<string name="serverip">http://192.168.2.1:8010</string>
+	<string name="loginposturl">/profile/create</string>
+	<string name="registerurl">/profile/update</string>
+	<string name="trainurl">/train</string>
+	<string name="uploadurl">/upload</string>
+	<string name="uploadurl2">/at</string>
+	<string name="news">/news</string>
+</resources>

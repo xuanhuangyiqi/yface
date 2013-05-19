@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"   
+     android:layout_width="fill_parent"   
+     android:layout_height="wrap_content" android:scrollbars="vertical"
+     android:id="@+id/personalcentersc"> 
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:id="@+id/pcLinearLayout"
+    > 
+    <RelativeLayout android:id="@+id/top"  
+android:layout_width="fill_parent"  
+android:layout_height="wrap_content"  
+android:orientation="horizontal"  >  
+<TextView   
+            android:layout_width="fill_parent"  
+            android:layout_height="40dp"  
+            android:background="#363433"  
+            android:textColor="#FFFFFF"  
+            android:gravity="center" 
+            android:id="@+id/personinfotitlebar"   
+            android:textSize="20sp"/>
+         <ImageView 
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/head"
+            android:layout_alignLeft="@id/personinfotitlebar"
+            android:layout_alignBottom="@id/personinfotitlebar"
+            android:layout_alignTop="@id/personinfotitlebar"
+            android:layout_margin="@dimen/padding_minist"
+            android:id="@+id/yahooheader"/>
+         <TextView 
+            android:layout_width="wrap_content"  
+            android:layout_height="40dp"  
+            android:textColor="#FFFFFF"    
+            android:textSize="20sp"
+            android:text="xpsmiler"
+            android:id="@+id/yahooname"
+            android:layout_toRightOf="@id/yahooheader"
+            android:layout_alignBottom="@id/personinfotitlebar"
+            android:layout_alignTop="@id/personinfotitlebar"
+            android:layout_marginLeft="@dimen/padding_medium"
+            android:gravity="center"
+             /> 
+</RelativeLayout>  
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    >    
+<ImageView android:id="@+id/headimage" android:layout_width="wrap_content" 
+    android:src="@drawable/header"    
+   android:layout_height="wrap_content" android:layout_gravity="left"/> 
+   <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_marginLeft="4dp"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    > 
+    <TextView
+        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="19dp"  
+        android:textColor="#000000"
+        android:text="yahooname: obama"
+        android:id="@+id/pcyahooname"
+        />
+    <TextView
+        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="19dp"  
+        android:textColor="#000000"
+        android:text="aboutmename:obama"
+        android:id="@+id/pcaboutmename"
+        />
+    <TextView
+        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="19dp"  
+        android:textColor="#000000"
+        android:text="BirthPlace:Hawaii"
+        android:id="@+id/pcaboutmename"
+        />
+    <TextView
+        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="19dp"  
+        android:textColor="#000000"
+        android:text="GraduateSchool:Harvard"
+        android:id="@+id/pcaboutmename"
+        />
+    <TextView
+        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="19dp"  
+        android:textColor="#000000"
+        android:text="Specialty:Law"
+        android:id="@+id/pcaboutmename"
+        />
+    </LinearLayout>
+ </LinearLayout>
+ 
+	<LinearLayout 
+	    android:orientation="vertical"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    >
+    <TextView
+        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="19dp"  
+        android:textColor="#005790"
+        android:text="Barack Obama News, Photos and Opinion - HuffPost Politics"
+        android:id="@+id/yntitle1"
+        android:autoLink="web"
+        />
+    <TextView
+        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="12dp"  
+        android:textColor="#000000"
+        android:text="Get breaking news stories about Barack Obama, follow his presidency and re-election campaign, and share your toughts on the 44th U.S. president."
+        android:id="@+id/yncontent1"
+        android:autoLink="web"
+        />
+    <TextView
+	    android:background="@drawable/gradient_box"
+	    android:layout_height="2dp"
+	    android:layout_width="fill_parent"
+	    android:layout_margin="3dp" /> 
+	</LinearLayout>
+	<LinearLayout 
+	    android:orientation="vertical"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    >
+    <TextView
+        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="19dp"  
+        android:textColor="#005790"
+        android:text="Barack Obama News, Photos and Opinion - HuffPost Politics"
+        android:id="@+id/yntitle2"
+        android:autoLink="web"
+        />
+    <TextView
+        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="12dp"  
+        android:textColor="#000000"
+        android:text="Get breaking news stories about Barack Obama, follow his presidency and re-election campaign, and share your toughts on the 44th U.S. president."
+        android:id="@+id/yncontent2"
+        android:autoLink="web"
+        />
+    <TextView
+	    android:background="@drawable/gradient_box"
+	    android:layout_height="2dp"
+	    android:layout_width="fill_parent"
+	    android:layout_margin="3dp" /> 
+	</LinearLayout>
+		<LinearLayout 
+	    android:orientation="vertical"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    >
+    <TextView
+        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="19dp"  
+        android:textColor="#005790"
+        android:text="Barack Obama News, Photos and Opinion - HuffPost Politics"
+        android:id="@+id/yntitle3"
+        android:autoLink="web"
+        />
+    <TextView
+        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="12dp"  
+        android:textColor="#000000"
+        android:text="Get breaking news stories about Barack Obama, follow his presidency and re-election campaign, and share your toughts on the 44th U.S. president."
+        android:id="@+id/yncontent3"
+        android:autoLink="web"
+        />
+    <TextView
+	    android:background="@drawable/gradient_box"
+	    android:layout_height="2dp"
+	    android:layout_width="fill_parent"
+	    android:layout_margin="3dp" /> 
+	</LinearLayout>
+</LinearLayout> 		
+</ScrollView> 

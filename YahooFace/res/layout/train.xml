@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>  
+<RelativeLayout  
+    xmlns:android="http://schemas.android.com/apk/res/android"  
+    android:orientation="vertical"  
+    android:layout_width="fill_parent"  
+    android:layout_height="fill_parent"
+    android:id="@+id/writelyLayout">
+        <TextView   
+            android:layout_width="fill_parent"  
+            android:layout_height="40dp"  
+            android:background="#363433"  
+            android:textColor="#FFFFFF"  
+            android:gravity="center" 
+            android:id="@+id/personinfotitlebar"   
+            android:textSize="20sp"/>
+         <ImageView 
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/head"
+            android:layout_alignLeft="@id/personinfotitlebar"
+            android:layout_alignBottom="@id/personinfotitlebar"
+            android:layout_alignTop="@id/personinfotitlebar"
+            android:layout_margin="@dimen/padding_minist"
+            android:id="@+id/yahooheader"/>
+         <TextView 
+            android:layout_width="wrap_content"  
+            android:layout_height="40dp"  
+            android:textColor="#FFFFFF"    
+            android:textSize="20sp"
+            android:text="xpsmiler"
+            android:id="@+id/yahooname"
+            android:layout_toRightOf="@id/yahooheader"
+            android:layout_alignBottom="@id/personinfotitlebar"
+            android:layout_alignTop="@id/personinfotitlebar"
+            android:layout_marginLeft="@dimen/padding_medium"
+            android:gravity="center"
+             />
+         
+        <RelativeLayout android:orientation="vertical"  
+            android:layout_width="fill_parent"  
+            android:layout_height="fill_parent"  
+            android:paddingLeft="10dp"  
+            android:paddingRight="10dp"
+            android:layout_below="@id/personinfotitlebar">  
+            
+            <TextView  
+                android:layout_width="fill_parent"    
+                android:layout_height="wrap_content"   
+                android:textSize="19dp"  
+                android:textColor="#00A2E8" 
+                android:id="@+id/traintip"   
+                android:text="Please select suitable images"
+                android:layout_marginTop="@dimen/padding_large"
+                >  
+            </TextView> 
+        <GridView
+        
+        android:id="@+id/gridview"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@id/traintip"
+        android:columnWidth="70dp"
+        android:gravity="center"
+        android:horizontalSpacing="2dp"
+        android:numColumns="3"
+        android:stretchMode="columnWidth"
+        android:verticalSpacing="2dp" />
+        <RelativeLayout android:layout_width="fill_parent"  
+           android:layout_height="fill_parent"
+           >  
+           <LinearLayout 
+               android:layout_width="fill_parent"
+               android:layout_height="wrap_content"
+               android:orientation="horizontal"
+               android:layout_alignParentBottom="true">  
+           <Button android:id="@+id/trainbtn"    
+               android:layout_width="fill_parent"  
+               android:layout_height="50dp"  
+               android:text="提交训练"  
+               android:textSize="19dp"  
+               android:layout_gravity="center_horizontal"  
+               android:layout_alignParentBottom="true"/> 
+           </LinearLayout>
+        </RelativeLayout>  
+        </RelativeLayout>  
+    </RelativeLayout>  

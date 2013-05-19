@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>  
+<LinearLayout  
+xmlns:android="http://schemas.android.com/apk/res/android"  
+android:layout_width="fill_parent"  
+android:layout_height="wrap_content"  
+android:orientation="vertical">  
+<RelativeLayout android:id="@+id/bottom"  
+android:layout_width="fill_parent"  
+android:layout_height="wrap_content"   >  
+<RelativeLayout android:id="@+id/top"  
+android:layout_width="fill_parent"  
+android:layout_height="wrap_content"  
+android:orientation="horizontal"  >  
+<TextView   
+            android:layout_width="fill_parent"  
+            android:layout_height="40dp"  
+            android:background="#363433"  
+            android:textColor="#FFFFFF"  
+            android:gravity="center" 
+            android:id="@+id/personinfotitlebar"   
+            android:textSize="20sp"/>
+         <ImageView 
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/head"
+            android:layout_alignLeft="@id/personinfotitlebar"
+            android:layout_alignBottom="@id/personinfotitlebar"
+            android:layout_alignTop="@id/personinfotitlebar"
+            android:layout_margin="@dimen/padding_minist"
+            android:id="@+id/yahooheader"/>
+         <TextView 
+            android:layout_width="wrap_content"  
+            android:layout_height="40dp"  
+            android:textColor="#FFFFFF"    
+            android:textSize="20sp"
+            android:text="xpsmiler"
+            android:id="@+id/yahooname"
+            android:layout_toRightOf="@id/yahooheader"
+            android:layout_alignBottom="@id/personinfotitlebar"
+            android:layout_alignTop="@id/personinfotitlebar"
+            android:layout_marginLeft="@dimen/padding_medium"
+            android:gravity="center"
+             /> 
+</RelativeLayout>  
+<LinearLayout android:id="@+id/center"  
+android:layout_width="fill_parent"  
+android:layout_height="wrap_content"  
+android:orientation="vertical"  
+android:layout_above="@id/bottom"  
+android:layout_below="@id/top" >  
+<TextView android:id="@+id/my_friends_list"  
+android:layout_width="fill_parent"  
+android:layout_height="wrap_content"  
+android:text="好友列表"  
+android:paddingTop="6dip"  
+android:paddingLeft="2dip"  
+android:layout_marginLeft="10dip"/>  
+<ListView android:id="@+id/sharelistview"  
+android:layout_width="fill_parent"  
+android:layout_height="wrap_content"  
+android:layout_marginBottom="6dip"/>  
+</LinearLayout>  
+<LinearLayout android:id="@+id/bottom"  
+android:layout_width="fill_parent"  
+android:layout_height="wrap_content"  
+android:orientation="horizontal"  
+android:layout_alignParentBottom="true"  >  
+<Button android:id="@+id/refresh"  
+android:layout_width="fill_parent"  
+android:layout_height="wrap_content"  
+android:layout_marginTop="2dip"  
+android:text="刷新用户列表"  
+android:layout_weight="1"/>  
+<Button android:id="@+id/back"  
+android:layout_width="fill_parent"  
+android:layout_height="wrap_content"  
+android:layout_marginTop="2dip"  
+android:text="返回"  
+android:layout_weight="1"/>  
+</LinearLayout>  
+</RelativeLayout>  
+</LinearLayout> 
