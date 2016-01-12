@@ -3,7 +3,7 @@ static_path = "static/"
 DATABASE = {
     'database': 'yface',
     'host':     'localhost',
-    'user':     'root',
-    'password': '901014',
+    'user':     'USER',
+    'password': 'PASSWORD',
 }
-baidu_key = 'B191d4e9d6d44492d34150a81718ca1c'
+baidu_key = 'XXXXXXXXXXXXXXXXXXXXXXX'
